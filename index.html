@@ -307,7 +307,7 @@ p {
 				</div>
 				<div class="idb-reveal idb-ef zoom-down elementor-element elementor-element-33af279f elementor-widget elementor-widget-heading" data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="1000" style="transition-duration: 2000ms; transition-delay: 1000ms;" data-id="33af279f" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
 				<div class="elementor-widget-container">
-					<h2 class="elementor-heading-title elementor-size-default">Nama Tamu</h2>				</div>
+					<h2 class="elementor-heading-title elementor-size-default" id="nama-tamu">Nama Tamu</h2>				</div>
 				</div>
 				<div class="idb-reveal idb-ef zoom-down elementor-element elementor-element-478d2b19 elementor-align-center elementor-widget elementor-widget-button" data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="1100" style="transition-duration: 2000ms; transition-delay: 1100ms;" data-id="478d2b19" data-element_type="widget" data-e-type="widget" id="open" data-widget_type="button.default">
 				<div class="elementor-widget-container">
@@ -2063,5 +2063,33 @@ body[style*="position:fixed"] #kolom{
       });
     });
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 1. Fungsi untuk mengambil parameter dari URL
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // 2. Ambil nilai dari parameter 'to'
+    var namaTamu = getUrlParameter('to');
+
+    // 3. Jika parameter 'to' ada di URL, ubah teks elemen nama tamu
+    if (namaTamu !== '') {
+      var elNama = document.getElementById('nama-tamu');
+      if (elNama) {
+        elNama.innerText = namaTamu;
+      }
+      
+      // Bonus: jika ada input form RSVP/ucapan, nama tamu bisa langsung terisi otomatis
+      var inputRsvpNama = document.querySelector('[data-rsvp="name"]');
+      if (inputRsvpNama) {
+        inputRsvpNama.value = namaTamu;
+      }
+    }
+  });
+</script>
 	</body>
 </html>
